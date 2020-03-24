@@ -354,8 +354,8 @@ def read_espresso_out(fileobj, index=-1, results_required=True):
 
                 if spin == 1:
                     assert len(eigenvalues[0]) == len(eigenvalues[1])
-                assert len(eigenvalues[0]) == len(ibzkpts), \
-                    (np.shape(eigenvalues), len(ibzkpts))
+                #assert len(eigenvalues[0]) == len(ibzkpts), \
+                #    (np.shape(eigenvalues), len(ibzkpts))
 
                 kpts = []
                 for s in range(spin + 1):
@@ -1196,9 +1196,9 @@ def construct_namelist(parameters=None, warn=False, **kwargs):
                 sec_list[key] = kwargs.pop(key)
 
             # Check if there is a key(i) version (no extra parsing)
-            for arg_key in parameters.get(section, {}):
-                if arg_key.split('(')[0].strip().lower() == key.lower():
-                    sec_list[arg_key] = parameters[section].pop(arg_key)
+            #for arg_key in parameters.get(section, {}):
+            #    if arg_key.split('(')[0].strip().lower() == key.lower():
+            #        sec_list[arg_key] = parameters[section].pop(arg_key)
             cp_parameters = parameters.copy()
             for arg_key in cp_parameters:
                 if arg_key.split('(')[0].strip().lower() == key.lower():
