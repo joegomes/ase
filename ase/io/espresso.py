@@ -1263,8 +1263,9 @@ def grep_valence(pseudopotential):
                     line = list(filter(lambda x: 'z_valence' in x,
                                        line.split(' ')))[0]
                 return float(line.split('=')[-1].strip().strip('"'))
-        else:
-            raise ValueError('Valence missing in {}'.format(pseudopotential))
+        #else:
+            #return 0.0
+            #raise ValueError('Valence missing in {}'.format(pseudopotential))
 
 
 def cell_to_ibrav(cell, ibrav):
@@ -1546,15 +1547,15 @@ def write_espresso_in(fd, atoms, input_data=None, pseudopotentials=None,
         for atom, magmom in zip(atoms, atoms.get_initial_magnetic_moments()):
             if (atom.symbol, magmom) not in atomic_species:
                 # spin as fraction of valence
-                fspin = float(magmom) / species_info[atom.symbol]['valence']
+                #fspin = float(magmom) / species_info[atom.symbol]['valence']
                 # Index in the atomic species list
                 sidx = len(atomic_species) + 1
                 # Index for that atom type; no index for first one
                 tidx = sum(atom.symbol == x[0] for x in atomic_species) or ' '
                 atomic_species[(atom.symbol, magmom)] = (sidx, tidx)
                 # Add magnetization to the input file
-                mag_str = 'starting_magnetization({0})'.format(sidx)
-                input_parameters['system'][mag_str] = fspin
+                #mag_str = 'starting_magnetization({0})'.format(sidx)
+                #input_parameters['system'][mag_str] = fspin
                 atomic_species_str.append(
                     '{species}{tidx} {mass} {pseudo}\n'.format(
                         species=atom.symbol, tidx=tidx, mass=atom.mass,
